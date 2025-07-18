@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mccounting_text/mccounting_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:wallet/pages/details/detail_page.dart';
 import 'package:wallet/pages/home/components/balance.dart';
 import 'package:wallet/pages/home/components/card/front_card.dart';
 import 'package:wallet/models/credit_card.dart';
@@ -79,12 +79,26 @@ class _HomePageState extends State<HomePage> {
             _currentCardIndex = index;
           }),
           itemBuilder: (context, index) {
-            return Container(
-              padding: EdgeInsets.all(height * 0.02),
-              child: FrontCard(
-                card: cards[index],
-                width: width,
-                height: height,
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailPage(
+                      card: cards[index],
+                      height: height,
+                      width: width,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                padding: EdgeInsets.all(height * 0.02),
+                child: FrontCard(
+                  card: cards[index],
+                  width: width,
+                  height: height,
+                ),
               ),
             );
           },
