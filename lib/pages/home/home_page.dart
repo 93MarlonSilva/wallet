@@ -1,14 +1,12 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:wallet/pages/details/detail_page.dart';
+import 'package:wallet/constants.dart';
 import 'package:wallet/pages/home/components/balance.dart';
-import 'package:wallet/pages/home/components/card/front_card.dart';
+import 'package:wallet/pages/home/components/card_selector.dart';
+import 'package:wallet/components/card/front_card.dart';
 import 'package:wallet/models/credit_card.dart';
 import 'package:wallet/pages/home/components/home_header.dart';
-// Removido: import 'package:wallet/size.config.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,10 +16,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  PageController pageController = PageController(viewportFraction: 0.6);
-
   int _currentCardIndex = 0;
   int _previousCardIndex = 0;
+  double _dragOffset = 0.0; // Armazena o deslocamento do arrasto
 
   @override
   void initState() {
@@ -34,94 +31,122 @@ class _HomePageState extends State<HomePage> {
     final size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
+
     return Scaffold(
-      backgroundColor: Colors.black87,
-      appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-          size: height * 0.04,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: AppGradients.backgroundGradient,
         ),
-      ),
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            HomeHeader(width: width, height: height),
-            Balance(
-              card: cards[_currentCardIndex],
-              height: height,
-              width: width,
-              previousCardIndex: _previousCardIndex,
-              currentCardIndex: _currentCardIndex,
-            ),
-            _buildCardsList(width: width, height: height),
-            _buildCardIndicator(width: width, height: height),
-          ],
+        child: SafeArea(
+          child: Column(
+            children: [
+              HomeHeader(width: width, height: height),
+              Balance(
+                card: cards[_currentCardIndex],
+                height: height,
+                width: width,
+                previousCardIndex: _previousCardIndex,
+                currentCardIndex: _currentCardIndex,
+              ),
+              _buildCardsSection(width: width, height: height),
+              _buildCardIndicator(width: width, height: height),
+              CardSelector(
+                selectedIndex: _currentCardIndex,
+                onCardSelected: (index) {
+                  setState(() {
+                    _previousCardIndex = _currentCardIndex;
+                    _currentCardIndex = index;
+                    _dragOffset = 0.0; // Reseta o deslocamento
+                  });
+                },
+                cards: cards,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  _buildCardsList({required double width, required double height}) => Expanded(
-    child: Expanded(
-      child: Transform(
-        transform: Matrix4.identity()
-          ..translate(-width * 0.18)
-          ..rotateZ(-pi / 2),
-        alignment: Alignment.center,
-        child: PageView.builder(
-          scrollDirection: Axis.vertical,
-          controller: pageController,
-          itemCount: cards.length,
-          onPageChanged: (index) => setState(() {
-            _previousCardIndex = _currentCardIndex;
-            _currentCardIndex = index;
-          }),
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailPage(
-                      card: cards[index],
-                      height: height,
-                      width: width,
-                    ),
+  Widget _buildCardsSection({required double width, required double height}) {
+  final controller = PageController(
+    viewportFraction: 0.66,
+    initialPage: _currentCardIndex,
+  );
+
+  return SizedBox(
+    height: 380,
+    child: PageView.builder(
+      
+      scrollDirection: Axis.vertical,
+      controller: controller,
+      itemCount: cards.length,
+      onPageChanged: (index) {
+        setState(() {
+          _previousCardIndex = _currentCardIndex;
+          _currentCardIndex = index;
+        });
+      },
+      itemBuilder: (context, index) {
+        return AnimatedBuilder(
+          animation: controller,
+          builder: (context, child) {
+            double value = 0;
+            if (controller.position.haveDimensions) {
+              value = controller.page! - index;
+              value = (1 - (value.abs() * 0.3)).clamp(0.7, 1.0);
+            }
+
+            double angle = ((controller.page ?? index) - index).toDouble();
+            angle = angle.clamp(-1.0, 1.0);
+
+            return Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.identity()
+                ..setEntry(3, 2, 0.001)
+                ..rotateX(angle * 0.4)
+                ..scale(value),
+              child: Opacity(
+                opacity: value,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: FrontCard(
+                    card: cards[index],
+                    width: width * 0.85,
+                    height: 200,
                   ),
-                );
-              },
-              child: Container(
-                padding: EdgeInsets.all(height * 0.02),
-                child: FrontCard(
-                  card: cards[index],
-                  width: width,
-                  height: height,
                 ),
               ),
             );
           },
-        ),
-      ),
+        );
+      },
     ),
   );
+}
 
-  _buildCardIndicator({required double width, required double height}) =>
-      Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: width * 0.02,
-          vertical: height * 0.04,
-        ),
-        child: SmoothPageIndicator(
-          controller: pageController,
-          count: cards.length,
-          effect: WormEffect(
-            dotHeight: height * 0.01,
-            dotWidth: height * 0.01,
-            activeDotColor: Colors.white,
-            dotColor: Colors.white30,
+  Widget _buildCardIndicator({required double width, required double height}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSizes.paddingMedium),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          cards.length,
+          (index) => AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            width: index == _currentCardIndex ? 24 : 8,
+            height: 8,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: index == _currentCardIndex
+                  ? AppColors.primary
+                  : const Color.fromARGB(255, 49, 59, 88),
+            ),
           ),
         ),
-      );
+      ),
+    );
+  }
 }

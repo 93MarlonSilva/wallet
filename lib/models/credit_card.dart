@@ -1,53 +1,74 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:wallet/constants.dart';
 
 enum CardBrand { visa, mastercard }
 
 class CreditCard {
   int id;
-  String cardHolder, securityCode, number;
+  String cardHolder, securityCode, number, expiryDate;
   CardBrand brand;
   double amount;
   List<Color> colors;
+  String cardType;
 
   CreditCard({
     required this.id,
     required this.cardHolder,
     required this.securityCode,
     required this.number,
+    required this.expiryDate,
     required this.brand,
     required this.amount,
     required this.colors,
+    required this.cardType,
   });
 }
 
 List<CreditCard> cards = [
   CreditCard(
     id: 1,
-    cardHolder: "DevDesign",
-    securityCode: "4260 553",
-    number: "1234 5678 9101 1123",
-    brand: CardBrand.visa,
+    cardHolder: "Sandy Chungus",
+    securityCode: "123",
+    number: "5000 0000 0000 0000",
+    expiryDate: "12/25",
+    brand: CardBrand.mastercard,
     amount: 2572.52,
-    colors: [Color(0xFF0000FF), Color(0XFF377CFF)],
+    colors: AppColors.cardGradient1,
+    cardType: "Credit",
   ),
   CreditCard(
     id: 2,
-    cardHolder: "DevDesign",
-    securityCode: "4260 553",
-    number: "1234 5678 9101 1123",
-    brand: CardBrand.mastercard,
+    cardHolder: "Alex Johnson",
+    securityCode: "456",
+    number: "4111 1111 1111 1111",
+    expiryDate: "09/26",
+    brand: CardBrand.visa,
     amount: 7535.41,
-    colors: [Color(0xFFFFA351), Color(0xFFF83D34)],
+    colors: AppColors.cardGradient2,
+    cardType: "Debit",
   ),
   CreditCard(
     id: 3,
-    cardHolder: "DevDesign",
-    securityCode: "4260 553",
-    number: "1234 5678 9101 1123",
+    cardHolder: "Maria Silva",
+    securityCode: "789",
+    number: "5555 5555 5555 4444",
+    expiryDate: "03/27",
     brand: CardBrand.mastercard,
     amount: 12517.07,
-    colors: [Color(0xFF990099), Color(0xFF660066)],
+    colors: AppColors.cardGradient3,
+    cardType: "Credit",
+  ),
+  CreditCard(
+    id: 4,
+    cardHolder: "David Chen",
+    securityCode: "321",
+    number: "4000 0000 0000 0002",
+    expiryDate: "06/26",
+    brand: CardBrand.visa,
+    amount: 8923.15,
+    colors: AppColors.cardGradient4,
+    cardType: "Debit",
   ),
 ];

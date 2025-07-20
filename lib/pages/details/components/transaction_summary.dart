@@ -18,8 +18,8 @@ class TransactionSummary extends StatelessWidget {
       children: [
         ListTile(
           leading: Container(
-            width: width * 0.6,
-            height: height * 0.6,
+            width: width * 0.2,
+            height: height * 0.2,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [transaction.color[400]!, transaction.color[700]!],
