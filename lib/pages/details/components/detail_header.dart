@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/constants.dart';
-import 'package:wallet/pages/home/home_page.dart';
 
 class DetailHeader extends StatefulWidget {
   final double width;
@@ -23,9 +22,7 @@ class _DetailHeaderState extends State<DetailHeader> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                ),
+                onTap: () => Navigator.of(context).pop(),
                 child: Container(
                   padding: const EdgeInsets.all(AppSizes.paddingSmall),
                   decoration: BoxDecoration(
