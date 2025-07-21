@@ -32,13 +32,7 @@ class FrontCard extends StatelessWidget {
             end: Alignment.bottomRight,
             stops: const [0.0, 1.0],
           ),
-          boxShadow: [
-            BoxShadow(
-              color: card.colors[0].withOpacity(0.3),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-          ],
+          
         ),
         child: Padding(
           padding: const EdgeInsets.all(24),

@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wallet/constants.dart';
+import 'package:wallet/pages/details/components/detail_card.dart';
+import 'package:wallet/pages/details/detail_page.dart';
 import 'package:wallet/pages/home/components/balance.dart';
 import 'package:wallet/pages/home/components/card_selector.dart';
 import 'package:wallet/components/card/front_card.dart';
@@ -9,7 +10,8 @@ import 'package:wallet/models/credit_card.dart';
 import 'package:wallet/pages/home/components/home_header.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final void Function(CreditCard)? onCardTap;
+  const HomePage({super.key, this.onCardTap});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -18,12 +20,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentCardIndex = 0;
   int _previousCardIndex = 0;
-  double _dragOffset = 0.0; // Armazena o deslocamento do arrasto
+  double _dragOffset = 0.0;
 
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   }
 
   @override
@@ -31,14 +34,18 @@ class _HomePageState extends State<HomePage> {
     final size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
-
+  
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: AppGradients.backgroundGradient,
-        ),
-        child: SafeArea(
-          child: Column(
+      body: Stack(
+        children: [
+          // Gradiente de fundo
+          Container(
+            decoration: const BoxDecoration(
+              gradient:  AppGradients.backgroundGradient
+            ),
+          ),
+          // Conteúdo da tela
+          Column(
             children: [
               HomeHeader(width: width, height: height),
               Balance(
@@ -56,74 +63,96 @@ class _HomePageState extends State<HomePage> {
                   setState(() {
                     _previousCardIndex = _currentCardIndex;
                     _currentCardIndex = index;
-                    _dragOffset = 0.0; // Reseta o deslocamento
+                    _dragOffset = 0.0;
                   });
                 },
                 cards: cards,
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
 
   Widget _buildCardsSection({required double width, required double height}) {
-  final controller = PageController(
-    viewportFraction: 0.66,
-    initialPage: _currentCardIndex,
-  );
+    final controller = PageController(
+      viewportFraction: 0.66,
+      initialPage: _currentCardIndex,
+    );
 
-  return SizedBox(
-    height: 380,
-    child: PageView.builder(
-      
-      scrollDirection: Axis.vertical,
-      controller: controller,
-      itemCount: cards.length,
-      onPageChanged: (index) {
-        setState(() {
-          _previousCardIndex = _currentCardIndex;
-          _currentCardIndex = index;
-        });
-      },
-      itemBuilder: (context, index) {
-        return AnimatedBuilder(
-          animation: controller,
-          builder: (context, child) {
-            double value = 0;
-            if (controller.position.haveDimensions) {
-              value = controller.page! - index;
-              value = (1 - (value.abs() * 0.3)).clamp(0.7, 1.0);
-            }
-
-            double angle = ((controller.page ?? index) - index).toDouble();
-            angle = angle.clamp(-1.0, 1.0);
-
-            return Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateX(angle * 0.4)
-                ..scale(value),
-              child: Opacity(
-                opacity: value,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: FrontCard(
-                    card: cards[index],
-                    width: width * 0.85,
-                    height: 200,
-                  ),
+    return SizedBox(
+      height: 380,
+      child: PageView.builder(
+        scrollDirection: Axis.vertical,
+        controller: controller,
+        itemCount: cards.length,
+        onPageChanged: (index) {
+          setState(() {
+            _previousCardIndex = _currentCardIndex;
+            _currentCardIndex = index;
+          });
+        },
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap:  () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => DetailPage(
+                      card: cards[index],
+                      height: height,
+                      width: width,
+                  )),
                 ),
-              ),
-            );
-          },
-        );
-      },
-    ),
-  );
-}
+            child: AnimatedBuilder(
+              animation: controller,
+              builder: (context, child) {
+                double value = 0.6;
+                double angle = 0.0;
+
+                if (controller.position.haveDimensions) {
+                  value = controller.page! - index;
+                  value = (1 - (value.abs() * 0.3)).clamp(0.7, 1.0);
+                  angle = ((controller.page ?? index) - index).toDouble();
+                  angle = angle.clamp(-1.0, 1.0);
+                } else if (index == _currentCardIndex) {
+                  value = 1.0;
+                  angle = 0.0;
+                }
+
+                return Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..setEntry(3, 2, 0.001)
+                    ..rotateX(angle * 0.4)
+                    ..scale(value),
+                  child: Opacity(
+                    opacity: value,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: index == _currentCardIndex
+                          ? Hero(
+                              tag: 'card-cards[index].id',
+                              child: FrontCard(
+                                card: cards[index],
+                                width: width * 0.85,
+                                height: 200,
+                                animateCardNumber: true,
+                              ),
+                            )
+                          : FrontCard(
+                              card: cards[index],
+                              width: width * 0.85,
+                              height: 200,
+                            ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   Widget _buildCardIndicator({required double width, required double height}) {
     return Padding(

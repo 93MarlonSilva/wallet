@@ -14,57 +14,86 @@ class TransactionSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          leading: Container(
-            width: width * 0.2,
-            height: height * 0.2,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [transaction.color[400]!, transaction.color[700]!],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+    final bool isIncome = transaction.value >= 0;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: width * 0.04, vertical: height * 0.012),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.04),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 8,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.04, vertical: height * 0.018),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: width * 0.11,
+                height: width * 0.11,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [transaction.color[400]!, transaction.color[700]!],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Icon(
+                    transaction.icon,
+                    color: Colors.white,
+                    size: width * 0.055,
+                  ),
+                ),
               ),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              transaction.icon,
-              color: Colors.white,
-              size: height * 0.04,
-            ),
-          ),
-          title: Text(
-            transaction.title,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.white70,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: Text(
-            transaction.category,
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(color: Colors.white70),
-          ),
-          trailing: Text(
-            transaction.value.toStringAsFixed(2),
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.white70,
-              fontWeight: FontWeight.bold,
-            ),
+              SizedBox(width: width * 0.045),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      transaction.title,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Text(
+                          transaction.category,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Colors.white54,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: width * 0.02),
+              Text(
+                (isIncome ? '+ ' : '- ') + transaction.value.abs().toStringAsFixed(2),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: isIncome ? Colors.greenAccent : Colors.redAccent,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ],
           ),
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(
-            width * 0.02,
-            width * 0.1,
-            0,
-            height * 0.1,
-          ),
-          child: Divider(color: Colors.white24, height: 1),
-        ),
-      ],
+      ),
     );
   }
 }

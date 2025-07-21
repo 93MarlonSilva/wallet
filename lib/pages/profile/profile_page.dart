@@ -16,33 +16,18 @@ class ProfilePage extends StatelessWidget {
             children: [
               // Header
               Padding(
-                padding: const EdgeInsets.all(AppSizes.paddingLarge),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(AppSizes.paddingSmall),
-                      decoration: BoxDecoration(
-                        color: AppColors.secondary.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
-                      ),
-                      child: const Icon(
-                        Icons.person,
-                        color: AppColors.secondary,
-                        size: 24,
-                      ),
+                  padding: const EdgeInsets.all(AppSizes.paddingLarge),
+                  child: Text(
+                    'Profile',
+                    style: TextStyle(
+                      color: AppColors.textPrimary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
                     ),
-                    const SizedBox(width: 12),
-                    const Text(
-                      'Profile',
-                      style: TextStyle(
-                        color: AppColors.textPrimary,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
+                const SizedBox(height: 20), 
               
               // Profile Info
               Padding(
@@ -59,13 +44,31 @@ class ProfilePage extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: AppColors.primary.withOpacity(0.2),
-                        child: const Icon(
-                          Icons.person,
-                          color: AppColors.primary,
-                          size: 32,
+                                            Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            colors: [
+                              AppColors.success,
+                              AppColors.blue,
+                              AppColors.secondary,
+                            ],
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(3),
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: AppColors.background,
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/user.png',
+                                width: 60,
+                                height: 60,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(width: AppSizes.paddingLarge),
@@ -106,36 +109,40 @@ class ProfilePage extends StatelessWidget {
               
               // Menu Items
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
-                  child: Column(
-                    children: [
-                      _buildMenuItem(
-                        icon: Icons.notifications,
-                        title: 'Notifications',
-                        subtitle: 'Manage your notifications',
-                        onTap: () {},
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                      child: Column(
+                        children: [
+                          _buildMenuItem(
+                            icon: Icons.notifications,
+                            title: 'Notifications',
+                            subtitle: 'Manage your notifications',
+                            onTap: () {},
+                          ),
+                          _buildMenuItem(
+                            icon: Icons.security,
+                            title: 'Security',
+                            subtitle: 'Password and authentication',
+                            onTap: () {},
+                          ),
+                          _buildMenuItem(
+                            icon: Icons.help,
+                            title: 'Help & Support',
+                            subtitle: 'Get help and contact support',
+                            onTap: () {},
+                          ),
+                          _buildMenuItem(
+                            icon: Icons.info,
+                            title: 'About',
+                            subtitle: 'App version and information',
+                            onTap: () {},
+                          ),
+                        ],
                       ),
-                      _buildMenuItem(
-                        icon: Icons.security,
-                        title: 'Security',
-                        subtitle: 'Password and authentication',
-                        onTap: () {},
-                      ),
-                      _buildMenuItem(
-                        icon: Icons.help,
-                        title: 'Help & Support',
-                        subtitle: 'Get help and contact support',
-                        onTap: () {},
-                      ),
-                      _buildMenuItem(
-                        icon: Icons.info,
-                        title: 'About',
-                        subtitle: 'App version and information',
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -161,12 +168,12 @@ class ProfilePage extends StatelessWidget {
         leading: Container(
           padding: const EdgeInsets.all(AppSizes.paddingSmall),
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.1),
+            color: AppColors.blue.withOpacity(0.1),
             borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
           ),
           child: Icon(
             icon,
-            color: AppColors.primary,
+            color: AppColors.blue,
             size: 20,
           ),
         ),

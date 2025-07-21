@@ -16,14 +16,38 @@ class DetailCard extends StatefulWidget {
   DetailCardState createState() => DetailCardState();
 }
 
-class DetailCardState extends State<DetailCard> {
+class DetailCardState extends State<DetailCard> with SingleTickerProviderStateMixin {
   bool animateCardNumber = true;
+  late AnimationController _controller;
+  late Animation<double> _flipAnimation;
+  bool flipByGesture = false;
 
   @override
   void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 4),
+    );
+    _flipAnimation = Tween<double>(begin: 0, end: 360).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          flipByGesture = true;
+        });
+      }
+    });
+    _controller.forward();
     Future.delayed(Duration(milliseconds: 1000),
         () => setState(() => animateCardNumber = false));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -32,9 +56,9 @@ class DetailCardState extends State<DetailCard> {
         alignment: Alignment.center,
         child: Padding(
             padding: EdgeInsets.fromLTRB(
-                widget.width * 0.1,
+                widget.width * 0.06,
                 0,
-                widget.width * 0.1,
+                widget.width * 0.06,
                 widget.sheetProgress > 0.462
                     ? widget.height * 0.55
                     : widget.height * 0.20 +
@@ -43,20 +67,29 @@ class DetailCardState extends State<DetailCard> {
               scale: widget.sheetProgress > 0.462
                   ? 1 - (widget.sheetProgress - 0.462)
                   : 1,
-              child: FlippableWidget(
-                  frontWidget: FrontCard(
-                    card: widget.card,
-                    showCardNumber: true,
-                    animateCardNumber: animateCardNumber,
-                    height: widget.height,
-                    width: widget.width,
-                  ),
-                  backWidget: BackCard(
-                    card: widget.card, height: widget.height, width: widget.width
-                ),
+              child: AnimatedBuilder(
+                animation: _flipAnimation,
+                builder: (context, child) {
+                  return FlippableWidget(
+                    flipAngle: flipByGesture ? null : _flipAnimation.value,
+                    frontWidget: Hero(
+                      tag: 'card-${widget.card.id}',
+                      child: FrontCard(
+                        card: widget.card,
+                        showCardNumber: true,
+                        animateCardNumber: animateCardNumber,
+                        height: widget.height,
+                        width: widget.width,
+                      ),
+                    ),
+                    backWidget: BackCard(
+                      card: widget.card, height: widget.height, width: widget.width
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-        ),
-     );
+         ),
+         );
   }
 }

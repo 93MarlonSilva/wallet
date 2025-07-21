@@ -6,12 +6,15 @@ class FlippableWidget extends StatefulWidget {
   final Widget frontWidget;
   final Widget backWidget;
   final bool isFront;
+  final double? flipAngle; // em graus
 
   const FlippableWidget(
       {super.key,
       required this.frontWidget,
       required this.backWidget,
-      this.isFront = true});
+      this.isFront = true,
+      this.flipAngle,
+      });
 
   @override
   _FlippableWidgetState createState() => _FlippableWidgetState();
@@ -29,29 +32,27 @@ class _FlippableWidgetState extends State<FlippableWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final double angle = widget.flipAngle ?? verticalDrag;
+    final bool showFront = angle <= 90 || angle >= 270;
     return GestureDetector(
-        onVerticalDragUpdate: (vertical) {
-          setState(() {
-            verticalDrag += vertical.delta.dy;
-            verticalDrag %= 360;
-            if (verticalDrag <= 90 || verticalDrag >= 270) {
-              isFront = true;
-            } else {
-              isFront = false;
-            }
-          });
-        },
-        child: Transform(
-          transform: Matrix4.identity()
-            ..setEntry(3, 2, 0.001)
-            ..rotateX((verticalDrag * pi) / 180),
-          alignment: Alignment.center,
-          child: isFront
-              ? widget.frontWidget
-              : Transform(
-                  transform: Matrix4.identity()..rotateX(pi),
-                  alignment: Alignment.center,
-                  child: widget.backWidget),
-        ));
+      onVerticalDragUpdate: (vertical) {
+        setState(() {
+          verticalDrag += vertical.delta.dy;
+          verticalDrag %= 360;
+        });
+      },
+      child: Transform(
+        transform: Matrix4.identity()
+          ..setEntry(3, 2, 0.001)
+          ..rotateX((angle * pi) / 180),
+        alignment: Alignment.center,
+        child: showFront
+            ? widget.frontWidget
+            : Transform(
+                transform: Matrix4.identity()..rotateX(pi),
+                alignment: Alignment.center,
+                child: widget.backWidget),
+      ),
+    );
   }
 }

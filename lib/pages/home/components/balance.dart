@@ -68,12 +68,12 @@ class _BalanceState extends State<Balance> {
               Container(
                 padding: const EdgeInsets.all(AppSizes.paddingSmall),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 0, 247, 255).withOpacity(0.2),
+                  color:  AppColors.blue.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
                 ),
                 child: const Icon(
                   Icons.account_balance_wallet,
-                  color: Color.fromARGB(255, 6, 220, 248),
+                  color: AppColors.blue,
                   size: 20,
                 ),
               ),
@@ -97,7 +97,7 @@ class _BalanceState extends State<Balance> {
               duration: const Duration(milliseconds: 800),
               precision: 2,
               style: const TextStyle(
-                color: Color.fromARGB(255, 4, 255, 242),
+                color: AppColors.blue,
                 fontSize: 32,
                 fontWeight: FontWeight.w500,
                 fontStyle: FontStyle.italic,

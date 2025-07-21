@@ -15,25 +15,24 @@ class _HomeHeaderState extends State<HomeHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge, vertical: AppSizes.paddingMedium),
+      padding: const EdgeInsets.only(left: AppSizes.paddingLarge, right: AppSizes.paddingLarge, top: AppSizes.paddingMedium + 60),
       child: Column(
         children: [
-          // Top bar with back button, title and menu
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(AppSizes.paddingSmall),
-                decoration: BoxDecoration(
-                  color: AppColors.textTertiary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
-                ),
-                child: const Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors.textPrimary,
-                  size: 20,
-                ),
-              ),
+              // Container(
+              //   padding: const EdgeInsets.all(AppSizes.paddingSmall),
+              //   decoration: BoxDecoration(
+              //     color: AppColors.textTertiary.withOpacity(0.1),
+              //     borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
+              //   ),
+              //   child: const Icon(
+              //     Icons.arrow_back_ios,
+              //     color: AppColors.textPrimary,
+              //     size: 20,
+              //   ),
+              // ),
               
               const Text(
                 'Wallet',
@@ -44,18 +43,18 @@ class _HomeHeaderState extends State<HomeHeader> {
                 ),
               ),
               
-              Container(
-                padding: const EdgeInsets.all(AppSizes.paddingSmall),
-                decoration: BoxDecoration(
-                  color: AppColors.textTertiary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
-                ),
-                child: const Icon(
-                  Icons.more_vert,
-                  color: AppColors.textPrimary,
-                  size: 20,
-                ),
-              ),
+              // Container(
+              //   padding: const EdgeInsets.all(AppSizes.paddingSmall),
+              //   decoration: BoxDecoration(
+              //     color: AppColors.textTertiary.withOpacity(0.1),
+              //     borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
+              //   ),
+              //   child: const Icon(
+              //     Icons.more_vert,
+              //     color: AppColors.textPrimary,
+              //     size: 20,
+              //   ),
+              // ),
             ],
           ),
           

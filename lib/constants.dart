@@ -8,6 +8,7 @@ class AppColors {
   static const Color primary = Color(0xFF6366F1);
   static const Color secondary = Color(0xFF8B5CF6);
   static const Color accent = Color(0xFFEC4899);
+  static const Color blue = Color(0xFF04FFF2);
   
   // Background colors
   static const Color background = Color(0xFF0F0F23);
@@ -34,21 +35,21 @@ class AppColors {
 class AppGradients {
   static const LinearGradient backgroundGradient = LinearGradient(
     colors: [
-      Color(0xFF0F0F23),
-      Color(0xFF1A1A2E),
-      Color(0xFF16213E),
-    ],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  );
-  
+    Color.fromARGB(255, 40, 50, 70), // Cor inicial
+    Color.fromARGB(250, 38, 48, 78), // Cor intermediária (mistura suave)
+   
+  ],
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  stops: [0.1, 0.5], // Define pontos de transição
+);
   static const LinearGradient cardGradient = LinearGradient(
     colors: [
       Color(0xFF1A1A2E),
       Color(0xFF16213E),
     ],
     begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    end: Alignment.bottomCenter,
   );
 }
 
