@@ -47,9 +47,9 @@ class BackCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),
-              
+
               const SizedBox(height: 24),
-              
+
               // Security code section
               Row(
                 children: [
@@ -75,9 +75,9 @@ class BackCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   const SizedBox(width: 16),
-                  
+
                   // CVV panel
                   Container(
                     height: 40,
@@ -100,9 +100,9 @@ class BackCard extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Bottom section with brand logo
               Row(
                 children: [
@@ -117,7 +117,7 @@ class BackCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   // Brand logo
                   Container(
                     height: 32,

@@ -97,18 +97,23 @@ class MyApp extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSizes.radiusLarge),
-            borderSide: BorderSide(color: AppColors.textTertiary.withOpacity(0.1)),
+            borderSide: BorderSide(
+              color: AppColors.textTertiary.withOpacity(0.1),
+            ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSizes.radiusLarge),
             borderSide: const BorderSide(color: AppColors.primary, width: 2),
           ),
           hintStyle: TextStyle(
-            color: AppColors.textTertiary.withOpacity(0.5), 
+            color: AppColors.textTertiary.withOpacity(0.5),
             fontFamily: 'Inter',
             fontSize: 16,
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16,
+          ),
         ),
         iconTheme: const IconThemeData(color: AppColors.textPrimary),
         useMaterial3: true,

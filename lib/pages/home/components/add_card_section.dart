@@ -7,7 +7,10 @@ class AddCardSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge, vertical: AppSizes.paddingMedium),
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppSizes.paddingLarge,
+        vertical: AppSizes.paddingMedium,
+      ),
       padding: const EdgeInsets.all(AppSizes.paddingLarge),
       decoration: BoxDecoration(
         gradient: AppGradients.cardGradient,
@@ -62,9 +65,9 @@ class AddCardSection extends StatelessWidget {
               ),
             ],
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Card number field
           SizedBox(
             height: 50,
@@ -89,7 +92,10 @@ class AddCardSection extends StatelessWidget {
                     size: 14,
                   ),
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
               ),
               style: const TextStyle(
                 color: AppColors.textPrimary,
@@ -98,9 +104,9 @@ class AddCardSection extends StatelessWidget {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 12),
-          
+
           // Card holder field
           SizedBox(
             height: 50,
@@ -112,7 +118,10 @@ class AddCardSection extends StatelessWidget {
                   color: AppColors.primary,
                   size: 20,
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
               ),
               style: const TextStyle(
                 color: AppColors.textPrimary,
@@ -121,17 +130,15 @@ class AddCardSection extends StatelessWidget {
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Add button
           SizedBox(
             width: double.infinity,
             height: 48,
             child: ElevatedButton(
-              onPressed: () {
-                // TODO: Implement add card functionality
-              },
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.textPrimary,
@@ -142,10 +149,7 @@ class AddCardSection extends StatelessWidget {
               ),
               child: const Text(
                 "Add Card",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -153,4 +157,4 @@ class AddCardSection extends StatelessWidget {
       ),
     );
   }
-} 
+}

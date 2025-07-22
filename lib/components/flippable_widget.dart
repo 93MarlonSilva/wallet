@@ -6,21 +6,21 @@ class FlippableWidget extends StatefulWidget {
   final Widget frontWidget;
   final Widget backWidget;
   final bool isFront;
-  final double? flipAngle; // em graus
+  final double? flipAngle;
 
-  const FlippableWidget(
-      {super.key,
-      required this.frontWidget,
-      required this.backWidget,
-      this.isFront = true,
-      this.flipAngle,
-      });
+  const FlippableWidget({
+    super.key,
+    required this.frontWidget,
+    required this.backWidget,
+    this.isFront = true,
+    this.flipAngle,
+  });
 
   @override
-  _FlippableWidgetState createState() => _FlippableWidgetState();
+  FlippableWidgetState createState() => FlippableWidgetState();
 }
 
-class _FlippableWidgetState extends State<FlippableWidget> {
+class FlippableWidgetState extends State<FlippableWidget> {
   bool isFront = true;
   double verticalDrag = 0;
 
@@ -51,7 +51,8 @@ class _FlippableWidgetState extends State<FlippableWidget> {
             : Transform(
                 transform: Matrix4.identity()..rotateX(pi),
                 alignment: Alignment.center,
-                child: widget.backWidget),
+                child: widget.backWidget,
+              ),
       ),
     );
   }

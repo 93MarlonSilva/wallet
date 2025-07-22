@@ -11,11 +11,14 @@ class HomeHeader extends StatefulWidget {
 }
 
 class _HomeHeaderState extends State<HomeHeader> {
- 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: AppSizes.paddingLarge, right: AppSizes.paddingLarge, top: AppSizes.paddingMedium + 60),
+      padding: const EdgeInsets.only(
+        left: AppSizes.paddingLarge,
+        right: AppSizes.paddingLarge,
+        top: AppSizes.paddingMedium + 60,
+      ),
       child: Column(
         children: [
           Row(
@@ -33,7 +36,6 @@ class _HomeHeaderState extends State<HomeHeader> {
               //     size: 20,
               //   ),
               // ),
-              
               const Text(
                 'Wallet',
                 style: TextStyle(
@@ -42,7 +44,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              
+
               // Container(
               //   padding: const EdgeInsets.all(AppSizes.paddingSmall),
               //   decoration: BoxDecoration(
@@ -57,7 +59,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               // ),
             ],
           ),
-          
+
           const SizedBox(height: AppSizes.paddingLarge),
         ],
       ),

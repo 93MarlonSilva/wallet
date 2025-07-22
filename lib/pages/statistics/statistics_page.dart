@@ -37,37 +37,46 @@ class _StatisticsPageState extends State<StatisticsPage> {
                   child: Text(
                     'Statistics',
                     style: TextStyle(
-                       color: AppColors.textPrimary,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+                      color: AppColors.textPrimary,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
                     ),
                     textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(height: 20), // Balance the back button
-
                 // Time Period Selection
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingLarge,
+                  ),
                   child: Container(
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
                       color: AppColors.surface.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
+                      borderRadius: BorderRadius.circular(
+                        AppSizes.radiusMedium,
+                      ),
                     ),
                     child: Row(
                       children: List.generate(
                         _periods.length,
                         (index) => Expanded(
                           child: GestureDetector(
-                            onTap: () => setState(() => _selectedPeriodIndex = index),
+                            onTap: () =>
+                                setState(() => _selectedPeriodIndex = index),
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+                                borderRadius: BorderRadius.circular(
+                                  AppSizes.radiusSmall,
+                                ),
                                 gradient: _selectedPeriodIndex == index
                                     ? const LinearGradient(
-                                        colors: [AppColors.primary, AppColors.blue],
+                                        colors: [
+                                          AppColors.primary,
+                                          AppColors.blue,
+                                        ],
                                         begin: Alignment.centerLeft,
                                         end: Alignment.centerRight,
                                       )
@@ -117,13 +126,16 @@ class _StatisticsPageState extends State<StatisticsPage> {
 
                 // Income/Outcome Tabs
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingLarge,
+                  ),
                   child: Row(
                     children: List.generate(
                       _tabs.length,
                       (index) => Expanded(
                         child: GestureDetector(
-                          onTap: () => setState(() => _selectedTabIndex = index),
+                          onTap: () =>
+                              setState(() => _selectedTabIndex = index),
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             decoration: BoxDecoration(
@@ -158,7 +170,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
 
                 // Overview Section
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingLarge,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -177,7 +191,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
                         ),
                         decoration: BoxDecoration(
                           color: AppColors.primary.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(AppSizes.radiusSmall),
+                          borderRadius: BorderRadius.circular(
+                            AppSizes.radiusSmall,
+                          ),
                         ),
                         child: const Text(
                           '-\$1234.45',
@@ -197,7 +213,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 // Line Chart
                 Container(
                   height: 300,
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingLarge,
+                  ),
                   child: _buildLineChart(),
                 ),
 
@@ -237,7 +255,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
 
                 // Pie Chart Section
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingLarge,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -258,7 +278,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 // Pie Chart
                 Container(
                   height: 250,
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingLarge,
+                  ),
                   child: _buildPieChart(),
                 ),
 
@@ -266,7 +288,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
 
                 // Bar Chart Section
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingLarge,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -287,7 +311,9 @@ class _StatisticsPageState extends State<StatisticsPage> {
                 // Bar Chart
                 Container(
                   height: 300,
-                  padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.paddingLarge,
+                  ),
                   child: _buildBarChart(),
                 ),
 
@@ -327,11 +353,15 @@ class _StatisticsPageState extends State<StatisticsPage> {
                     child: Text(
                       days[value.toInt()],
                       style: TextStyle(
-                        color: value.toInt() == 5 // Saturday
+                        color:
+                            value.toInt() ==
+                                5 // Saturday
                             ? AppColors.blue
                             : AppColors.textSecondary,
                         fontSize: 12,
-                        fontWeight: value.toInt() == 5 ? FontWeight.w600 : FontWeight.normal,
+                        fontWeight: value.toInt() == 5
+                            ? FontWeight.w600
+                            : FontWeight.normal,
                       ),
                     ),
                   );
@@ -374,10 +404,6 @@ class _StatisticsPageState extends State<StatisticsPage> {
   }
 
   List<FlSpot> _getWeekData() {
-    // Generate sample data based on transactions
-    final incomeTransactions = transactions.where((t) => t.value > 0).toList();
-    final outcomeTransactions = transactions.where((t) => t.value < 0).toList();
-
     // Calculate daily totals for the week
     final dailyData = List.generate(7, (index) {
       double total = 0;

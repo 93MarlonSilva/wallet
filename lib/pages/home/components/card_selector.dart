@@ -18,14 +18,17 @@ class CardSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      margin: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge, vertical: AppSizes.paddingSmall),
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppSizes.paddingLarge,
+        vertical: AppSizes.paddingSmall,
+      ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: cards.length,
         itemBuilder: (context, index) {
           final card = cards[index];
           final isSelected = index == selectedIndex;
-          
+
           return GestureDetector(
             onTap: () => onCardSelected(index),
             child: Container(
@@ -43,17 +46,24 @@ class CardSelector extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
-                      border: isSelected 
-                        ? Border.all(color: const Color.fromARGB(255, 0, 238, 255), width: 1.5)
-                        : null,
-                      boxShadow: isSelected ? [
-                        BoxShadow(
-                          color: card.colors[0].withOpacity(0.4),
-                          blurRadius: 12,
-                          offset: const Offset(0, 4),
-                        ),
-                      ] : null,
+                      borderRadius: BorderRadius.circular(
+                        AppSizes.radiusMedium,
+                      ),
+                      border: isSelected
+                          ? Border.all(
+                              color: const Color.fromARGB(255, 0, 238, 255),
+                              width: 1.5,
+                            )
+                          : null,
+                      boxShadow: isSelected
+                          ? [
+                              BoxShadow(
+                                color: card.colors[0].withOpacity(0.4),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ]
+                          : null,
                     ),
                     child: Center(
                       child: Icon(
@@ -63,16 +73,20 @@ class CardSelector extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   const SizedBox(height: 4),
-                  
+
                   // Card name
                   Text(
                     card.cardType,
                     style: TextStyle(
-                      color: isSelected ? AppColors.textPrimary : AppColors.textTertiary,
+                      color: isSelected
+                          ? AppColors.textPrimary
+                          : AppColors.textTertiary,
                       fontSize: 8,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.w400,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -99,4 +113,4 @@ class CardSelector extends StatelessWidget {
         return Icons.credit_card;
     }
   }
-} 
+}

@@ -31,9 +31,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-      decoration: BoxDecoration(
-        gradient: AppGradients.backgroundGradient,
-      ),
+        decoration: BoxDecoration(gradient: AppGradients.backgroundGradient),
         child: Column(
           children: [
             PlayAnimationBuilder(
@@ -42,12 +40,9 @@ class _DetailPageState extends State<DetailPage> {
               duration: Duration(milliseconds: 200),
               builder: (context, value, child) =>
                   Transform.translate(offset: Offset(0, value), child: child),
-              child: DetailHeader(
-                height: widget.height,
-                width: widget.width,
-              ),
+              child: DetailHeader(height: widget.height, width: widget.width),
             ),
-            const SizedBox(height: 24), // em vez de 60
+            const SizedBox(height: 24),
             PlayAnimationBuilder(
               tween: Tween(begin: 0.2, end: 1.0),
               curve: Curves.easeOut,
@@ -82,7 +77,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
             Expanded(
               child: ListView.builder(
-                padding: EdgeInsets.only(top: 8, bottom: 24), // adicione top
+                padding: EdgeInsets.only(top: 8, bottom: 24),
                 itemCount: transactions.length,
                 itemBuilder: (context, index) {
                   return TransactionSummary(
@@ -93,7 +88,6 @@ class _DetailPageState extends State<DetailPage> {
                 },
               ),
             ),
-            
           ],
         ),
       ),

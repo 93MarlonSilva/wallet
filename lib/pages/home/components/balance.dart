@@ -38,8 +38,7 @@ class _BalanceState extends State<Balance> {
   @override
   void didUpdateWidget(Balance oldWidget) {
     super.didUpdateWidget(oldWidget);
-    
-    // Só anima se o índice do cartão mudou (não durante o arrasto)
+
     if (widget.currentCardIndex != _lastAnimatedIndex) {
       _previousAmount = _currentAmount;
       _currentAmount = widget.card.amount;
@@ -50,7 +49,10 @@ class _BalanceState extends State<Balance> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge, vertical: AppSizes.paddingMedium),
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppSizes.paddingLarge,
+        vertical: AppSizes.paddingMedium,
+      ),
       padding: const EdgeInsets.all(AppSizes.paddingLarge),
       decoration: BoxDecoration(
         gradient: AppGradients.cardGradient,
@@ -68,7 +70,7 @@ class _BalanceState extends State<Balance> {
               Container(
                 padding: const EdgeInsets.all(AppSizes.paddingSmall),
                 decoration: BoxDecoration(
-                  color:  AppColors.blue.withOpacity(0.2),
+                  color: AppColors.blue.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
                 ),
                 child: const Icon(
@@ -88,7 +90,7 @@ class _BalanceState extends State<Balance> {
               ),
             ],
           ),
-          
+
           const SizedBox(height: AppSizes.paddingMedium),
           Center(
             child: McCountingText(
@@ -105,9 +107,9 @@ class _BalanceState extends State<Balance> {
               ),
             ),
           ),
-        
+
           const SizedBox(height: 8),
-          
+
           Row(
             children: [
               Container(

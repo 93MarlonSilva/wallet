@@ -1,16 +1,32 @@
-# wallet
+# Wallet UI Showcase
 
-A new Flutter project.
+This project is a Flutter application created with the goal of improving UI design skills, focusing on modern wallet app interfaces. It features smooth animations, interactive components, and a visually appealing, contemporary design.
+
+## Project Goals
+
+- Practice and enhance UI/UX design in Flutter
+- Implement modern wallet app concepts
+- Use animations to create engaging user experiences
+- Showcase best practices for layout, theming, and component structure
+
+## Features
+
+- Credit card visualization with flipping animation
+- Transaction history and statistics
+- Profile and balance overview
+- Responsive and adaptive layouts
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run this project:
 
-A few resources to get you started if this is your first Flutter project:
+1. Make sure you have [Flutter](https://flutter.dev/docs/get-started/install) installed.
+2. Clone this repository.
+3. Run `flutter pub get` to install dependencies.
+4. Run `flutter run` to launch the app on your device or emulator.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Project Layout
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Below is an overview of the app's main UI structure:
+
+![Project Layout](assets/projectlayout.png)

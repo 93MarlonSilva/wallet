@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wallet/constants.dart';
-import 'package:wallet/pages/details/components/detail_card.dart';
 import 'package:wallet/pages/details/detail_page.dart';
 import 'package:wallet/pages/home/components/balance.dart';
 import 'package:wallet/pages/home/components/card_selector.dart';
@@ -20,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _currentCardIndex = 0;
   int _previousCardIndex = 0;
-  double _dragOffset = 0.0;
+  double dragOffset = 0.0;
 
   @override
   void initState() {
@@ -34,17 +33,15 @@ class _HomePageState extends State<HomePage> {
     final size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
-  
+
     return Scaffold(
       body: Stack(
         children: [
-          // Gradiente de fundo
           Container(
             decoration: const BoxDecoration(
-              gradient:  AppGradients.backgroundGradient
+              gradient: AppGradients.backgroundGradient,
             ),
           ),
-          // Conteúdo da tela
           Column(
             children: [
               HomeHeader(width: width, height: height),
@@ -63,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   setState(() {
                     _previousCardIndex = _currentCardIndex;
                     _currentCardIndex = index;
-                    _dragOffset = 0.0;
+                    dragOffset = 0.0;
                   });
                 },
                 cards: cards,
@@ -95,13 +92,15 @@ class _HomePageState extends State<HomePage> {
         },
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap:  () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => DetailPage(
-                      card: cards[index],
-                      height: height,
-                      width: width,
-                  )),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DetailPage(
+                  card: cards[index],
+                  height: height,
+                  width: width,
                 ),
+              ),
+            ),
             child: AnimatedBuilder(
               animation: controller,
               builder: (context, child) {

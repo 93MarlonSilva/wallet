@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:wallet/models/credit_card.dart';
@@ -18,7 +17,7 @@ class FrontCard extends StatelessWidget {
     required this.height,
     required this.width,
   });
-  
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -32,7 +31,6 @@ class FrontCard extends StatelessWidget {
             end: Alignment.bottomRight,
             stops: const [0.0, 1.0],
           ),
-          
         ),
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -44,7 +42,10 @@ class FrontCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(12),
@@ -73,17 +74,17 @@ class FrontCard extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 32),
-              
+
               // Chip and card number section
               Row(
                 children: [
                   // Chip
-                  Image.asset('assets/card/chip.png', width: 50,),
-                  
+                  Image.asset('assets/card/chip.png', width: 50),
+
                   const SizedBox(width: 16),
-                  
+
                   // Card number
                   if (showCardNumber)
                     Expanded(
@@ -109,9 +110,9 @@ class FrontCard extends StatelessWidget {
                     ),
                 ],
               ),
-              
+
               const Spacer(),
-              
+
               // Bottom section with cardholder and brand
               Row(
                 children: [
@@ -141,7 +142,7 @@ class FrontCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  
+
                   // Expiry date
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,9 +167,9 @@ class FrontCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  
+
                   const SizedBox(width: 24),
-                  
+
                   // Brand logo
                   Container(
                     height: 32,

@@ -1,53 +1,57 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-
   static const Color sheetColor = Color(0xFF1A1A2E);
-  
+
   // Primary colors
   static const Color primary = Color(0xFF6366F1);
   static const Color secondary = Color(0xFF8B5CF6);
   static const Color accent = Color(0xFFEC4899);
   static const Color blue = Color(0xFF04FFF2);
-  
+
   // Background colors
   static const Color background = Color(0xFF0F0F23);
   static const Color surface = Color(0xFF1A1A2E);
   static const Color surfaceVariant = Color(0xFF16213E);
-  
+
   // Text colors
   static const Color textPrimary = Colors.white;
   static const Color textSecondary = Color(0xFFE5E7EB);
   static const Color textTertiary = Color(0xFF9CA3AF);
-  
+
   // Status colors
   static const Color success = Color(0xFF10B981);
   static const Color warning = Color(0xFFF59E0B);
   static const Color error = Color(0xFFEF4444);
-  
+
   // Card gradients
-  static const List<Color> cardGradient1 = [Color(0xFF8B5CF6), Color(0xFFEC4899)];
-  static const List<Color> cardGradient2 = [Color(0xFF10B981), Color(0xFF3B82F6)];
-  static const List<Color> cardGradient3 = [Color(0xFFF59E0B), Color(0xFFEF4444)];
-  static const List<Color> cardGradient4 = [Color(0xFF6366F1), Color(0xFF8B5CF6)];
+  static const List<Color> cardGradient1 = [
+    Color(0xFF8B5CF6),
+    Color(0xFFEC4899),
+  ];
+  static const List<Color> cardGradient2 = [
+    Color(0xFF10B981),
+    Color(0xFF3B82F6),
+  ];
+  static const List<Color> cardGradient3 = [
+    Color(0xFFF59E0B),
+    Color(0xFFEF4444),
+  ];
+  static const List<Color> cardGradient4 = [
+    Color(0xFF6366F1),
+    Color(0xFF8B5CF6),
+  ];
 }
 
 class AppGradients {
   static const LinearGradient backgroundGradient = LinearGradient(
-    colors: [
-    Color.fromARGB(255, 40, 50, 70), // Cor inicial
-    Color.fromARGB(250, 38, 48, 78), // Cor intermediária (mistura suave)
-   
-  ],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-  stops: [0.1, 0.5], // Define pontos de transição
-);
+    colors: [Color.fromARGB(255, 40, 50, 70), Color.fromARGB(250, 38, 48, 78)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    stops: [0.1, 0.5],
+  );
   static const LinearGradient cardGradient = LinearGradient(
-    colors: [
-      Color(0xFF1A1A2E),
-      Color(0xFF16213E),
-    ],
+    colors: [Color(0xFF1A1A2E), Color(0xFF16213E)],
     begin: Alignment.topLeft,
     end: Alignment.bottomCenter,
   );

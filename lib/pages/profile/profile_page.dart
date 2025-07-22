@@ -16,22 +16,24 @@ class ProfilePage extends StatelessWidget {
             children: [
               // Header
               Padding(
-                  padding: const EdgeInsets.all(AppSizes.paddingLarge),
-                  child: Text(
-                    'Profile',
-                    style: TextStyle(
-                      color: AppColors.textPrimary,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
+                padding: const EdgeInsets.all(AppSizes.paddingLarge),
+                child: Text(
+                  'Profile',
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 20), 
-              
+              ),
+              const SizedBox(height: 20),
+
               // Profile Info
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSizes.paddingLarge,
+                ),
                 child: Container(
                   padding: const EdgeInsets.all(AppSizes.paddingLarge),
                   decoration: BoxDecoration(
@@ -44,7 +46,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                                            Container(
+                      Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
@@ -104,15 +106,17 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: AppSizes.paddingLarge),
-              
+
               // Menu Items
               Expanded(
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: AppSizes.paddingLarge),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizes.paddingLarge,
+                      ),
                       child: Column(
                         children: [
                           _buildMenuItem(
@@ -171,11 +175,7 @@ class ProfilePage extends StatelessWidget {
             color: AppColors.blue.withOpacity(0.1),
             borderRadius: BorderRadius.circular(AppSizes.radiusMedium),
           ),
-          child: Icon(
-            icon,
-            color: AppColors.blue,
-            size: 20,
-          ),
+          child: Icon(icon, color: AppColors.blue, size: 20),
         ),
         title: Text(
           title,
@@ -187,10 +187,7 @@ class ProfilePage extends StatelessWidget {
         ),
         subtitle: Text(
           subtitle,
-          style: const TextStyle(
-            color: AppColors.textSecondary,
-            fontSize: 14,
-          ),
+          style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
         ),
         trailing: const Icon(
           Icons.arrow_forward_ios,
@@ -201,4 +198,4 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
-} 
+}
